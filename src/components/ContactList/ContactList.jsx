@@ -1,11 +1,16 @@
+import { useSelector } from 'react-redux';
 import Contact from '../Contact/Contact';
 import css from './ContactList.module.css';
-const ContactList = ({ visibleContcats, onDelete }) => {
+import { selectNameFilter } from '../../redux/filtersSlice';
+
+const ContactList = () => {
+  const filteredContacts = useSelector(selectNameFilter);
+
   return (
     <ul className={css.contactsList}>
-      {visibleContcats.map(contact => (
+      {filteredContacts.map(contact => (
         <li key={contact.id} className={css.contactListItem}>
-          <Contact data={contact} onDelete={onDelete} />
+          <Contact data={contact} />
         </li>
       ))}
     </ul>
